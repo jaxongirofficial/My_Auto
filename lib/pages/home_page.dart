@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "See All",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Color.fromARGB(255, 23, 110, 232),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -476,7 +476,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _getBodyContent(_currentIndex),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.blue.shade900,
+        backgroundColor: const Color.fromARGB(255, 7, 91, 208),
         color: Theme.of(context).scaffoldBackgroundColor,
         items: const [
           CurvedNavigationBarItem(

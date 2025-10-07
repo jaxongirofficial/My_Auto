@@ -23,10 +23,7 @@ class _LoginPageState extends State<LoginPage> {
             padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                Image.asset(
-                  "assets/icon/garage_icon.jpg",
-                  height: 100,
-                ),
+                Image.asset("assets/icon/garage_icon.jpg", height: 100),
                 const SizedBox(height: 10),
 
                 const SizedBox(height: 10),
@@ -61,9 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       icon: Icon(
-                        _obscureText
-                            ? Icons.visibility_off
-                            : Icons.visibility,
+                        _obscureText ? Icons.visibility_off : Icons.visibility,
                       ),
                       onPressed: () {
                         setState(() {
@@ -96,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                         "Sign Up",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(13, 71, 161, 1),
+                          color: const Color.fromARGB(255, 7, 91, 208),
                         ),
                       ),
                     ),
@@ -110,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(13, 71, 161, 1),
+                      backgroundColor: const Color.fromARGB(255, 7, 91, 208),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
