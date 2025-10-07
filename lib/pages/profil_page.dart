@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // 🔹 Login sahifasi uchun import
+import 'login_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -16,7 +16,7 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 5),
-            // Profil rasmi, ism va raqam
+
             Row(
               children: [
                 const CircleAvatar(
@@ -49,7 +49,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // Bo‘limlar
             _buildTile(
               Icons.shopping_bag_outlined,
               "My Orders",
@@ -70,7 +69,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(height: 30),
 
-            // 🌐 Language tugmasi (bosganda bottom sheet ochiladi)
             ListTile(
               leading: Icon(Icons.language, color: iconColor),
               title: Text(
@@ -93,7 +91,6 @@ class ProfilePage extends StatelessWidget {
 
             const Divider(height: 30),
 
-            // 🔴 Logout tugmasi
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text(
@@ -128,7 +125,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // 🌍 Tillarni tanlash uchun bottom sheet
   void _showLanguageSelector(BuildContext context, bool isDark) {
     showModalBottomSheet(
       context: context,
@@ -156,7 +152,6 @@ class ProfilePage extends StatelessWidget {
             ),
             const Divider(),
 
-            // 🇺🇿 Uzbek
             ListTile(
               leading: const Text("🇺🇿", style: TextStyle(fontSize: 22)),
               title: const Text("O'zbek tili"),
@@ -168,7 +163,6 @@ class ProfilePage extends StatelessWidget {
               },
             ),
 
-            // 🇷🇺 Russian
             ListTile(
               leading: const Text("🇷🇺", style: TextStyle(fontSize: 22)),
               title: const Text("Русский язык"),
@@ -180,7 +174,6 @@ class ProfilePage extends StatelessWidget {
               },
             ),
 
-            // 🇺🇸 English
             ListTile(
               leading: const Text("🇺🇸", style: TextStyle(fontSize: 22)),
               title: const Text("English"),

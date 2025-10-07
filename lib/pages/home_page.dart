@@ -270,6 +270,18 @@ class _HomePageState extends State<HomePage> {
     return InkWell(
       borderRadius: BorderRadius.circular(15),
       onTap: () {
+        final selectedName = name;
+
+        final others = _cars.where((car) => car['name'] != selectedName).map((
+          car,
+        ) {
+          return {
+            'imageUrl': car['image'] ?? '',
+            'name': car['name'] ?? '',
+            'price': car['price'] ?? '',
+          };
+        }).toList();
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -280,12 +292,13 @@ class _HomePageState extends State<HomePage> {
               price: price,
               location: location,
               date: date,
-              otherListings: [],
-              relatedProducts: [],
+              otherListings: others,
+              relatedProducts: others,
             ),
           ),
         );
       },
+
       child: Card(
         elevation: 3,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
