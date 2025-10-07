@@ -476,7 +476,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: _getBodyContent(_currentIndex),
       bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: const Color.fromARGB(255, 7, 91, 208),
+        backgroundColor: const Color.fromARGB(255, 9, 100, 227),
         color: Theme.of(context).scaffoldBackgroundColor,
         items: const [
           CurvedNavigationBarItem(
