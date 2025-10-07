@@ -3,6 +3,7 @@ import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:my_auto/pages/profil_page.dart';
+import 'cardetail_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -122,8 +123,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getBodyContent(int index) {
-    final media = MediaQuery.of(context).size.width;
-    print(media);
     switch (index) {
       case 0:
         return SingleChildScrollView(
@@ -228,7 +227,7 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    childAspectRatio: 0.75,
+                    childAspectRatio: 0.70,
                   ),
                   itemBuilder: (context, index) {
                     final car = _cars[index];
@@ -268,65 +267,110 @@ class _HomePageState extends State<HomePage> {
     required String location,
     required String date,
   }) {
-    return Card(
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(15),
-              topRight: Radius.circular(15),
-            ),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              width: double.infinity,
-              height: 110,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Text(
-              name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+    return InkWell(
+      borderRadius: BorderRadius.circular(15),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CarDetailPage(
+              imageUrl: imageUrl,
+              name: name,
+              desc: desc,
+              price: price,
+              location: location,
+              date: date,
+              otherListings: [],
+              relatedProducts: [],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            child: Row(
-              children: [
-                const Icon(Icons.location_on_outlined, size: 14),
-                const SizedBox(width: 4),
-                Text(location, style: const TextStyle(fontSize: 12)),
-              ],
+        );
+      },
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(15),
+                topRight: Radius.circular(15),
+              ),
+              child: Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 110,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(child: CircularProgressIndicator());
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey.shade200,
+                    height: 110,
+                    child: const Center(child: Icon(Icons.broken_image)),
+                  );
+                },
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            child: Row(
-              children: [
-                const Icon(Icons.access_time, size: 14),
-                const SizedBox(width: 4),
-                Text(date, style: const TextStyle(fontSize: 12)),
-              ],
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-            child: Text(desc, style: const TextStyle(fontSize: 12)),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Text(
-              price,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Row(
+                children: [
+                  const Icon(Icons.location_on_outlined, size: 14),
+                  const SizedBox(width: 4),
+                  Expanded(
+                    child: Text(
+                      location,
+                      style: const TextStyle(fontSize: 12),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Row(
+                children: [
+                  const Icon(Icons.access_time, size: 14),
+                  const SizedBox(width: 4),
+                  Text(date, style: const TextStyle(fontSize: 12)),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              child: Text(
+                desc,
+                style: const TextStyle(fontSize: 12),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Text(
+                price,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -337,7 +381,22 @@ class _HomePageState extends State<HomePage> {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Image.network(url, fit: BoxFit.cover, width: double.infinity),
+        child: Image.network(
+          url,
+          fit: BoxFit.cover,
+          width: double.infinity,
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) return child;
+            return const Center(child: CircularProgressIndicator());
+          },
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: Colors.grey.shade200,
+              height: 200,
+              child: const Center(child: Icon(Icons.broken_image)),
+            );
+          },
+        ),
       ),
     );
   }
@@ -361,6 +420,8 @@ class _HomePageState extends State<HomePage> {
         Text(
           name,
           style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
@@ -379,8 +440,8 @@ class _HomePageState extends State<HomePage> {
                   border: InputBorder.none,
                   hintStyle: TextStyle(
                     color: brightness == Brightness.dark
-                        ? Colors.white
-                        : Colors.black,
+                        ? Colors.white54
+                        : Colors.black54,
                   ),
                 ),
                 style: TextStyle(
