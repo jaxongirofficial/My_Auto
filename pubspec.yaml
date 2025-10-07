@@ -1,0 +1,32 @@
+name: my_auto
+description: "A new Flutter project."
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  curved_labeled_navigation_bar: ^2.0.6
+  carousel_slider: ^5.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/garage_icon.jpg"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icon/garage_icon.jpg
